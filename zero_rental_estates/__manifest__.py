@@ -21,7 +21,7 @@
         'views/rental_view.xml',
         'views/estate_status_view.xml',
         'views/estate_view.xml',
-        'potential_partner_view.xml',
+        'views/potential_partner_view.xml',
     ],
     # only loaded in demonstration mode
     'images': ['static/description/logo.PNG'],
