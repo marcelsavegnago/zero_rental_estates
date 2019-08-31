@@ -3,8 +3,8 @@
         <record id="acces_module_rental_estate" model="res.groups">
             <field name="name">Acces estate</field>
         </record>
-        <record id="acces_module_rental_lessor" model="res.groups">
-            <field name="name">Acces lessor</field>
+        <record id="acces_module_rental_partner" model="res.groups">
+            <field name="name">Acces Partner</field>
         </record>
         <record id="acces_module_rental_type" model="res.groups">
             <field name="name">Acces Type</field>
