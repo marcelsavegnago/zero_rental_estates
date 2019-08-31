@@ -12,7 +12,7 @@ from odoo.tools import float_compare, pycompat
 from odoo.addons import decimal_precision as dp
 
 
-class rental(models.Model):
+class Rental(models.Model):
     _name = 'lb.rental'
     _rec_name = 'estate_rented'
 
