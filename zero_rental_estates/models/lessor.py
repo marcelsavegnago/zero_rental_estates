@@ -7,7 +7,7 @@ from odoo.osv import expression
 
 from odoo.addons import decimal_precision as dp
  
-class lessor(models.Model):
+class Lessor(models.Model):
     _name = 'lb.lessor'
     _rec_name = 'name'
 
