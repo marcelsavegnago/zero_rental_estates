@@ -20,14 +20,14 @@ class Rental(models.Model):
     partner = fields.Many2one('res.partner', ondelete='cascade', string="partner", required=True)
     rental_status = fields.Selection([('inactive', 'Inactive'),('active', 'active')], string="Statut", compute='update_statut', help="Statut de la rental (active : rental en cours)")
     utilization = fields.Selection([('utilization1', 'utilization main if partner'),('utilization2', 'utilization secondary of partner'),('utilization3', 'utilization professional')], string="utilization")
-    date_quittancement = fields.Selection([('1', '1'),('2', '2'),('3', '3'),('4', '4'),('5', '5'),('6', '6'),('7', '7'),('8', '8'),('9', '9'),('10', '10'),('11', '11'),('12', '12'),('13', '13'),('14', '14'),('15', '15'),('16', '16'),('17', '17'),('18', '18'),('19', '19'),('20', '20'),('21', '21'),('22', '22'),('23', '23'),('24', '24'),('25', '25'),('26', '26'),('27', '27'),('28', '28'),('29', '29'),('30', '30'),('31', '31')], string="Date de quittancement", help="La date selon laquelle vos quittances seraient datées")
+    receipt_date = fields.Selection([('1', '1'),('2', '2'),('3', '3'),('4', '4'),('5', '5'),('6', '6'),('7', '7'),('8', '8'),('9', '9'),('10', '10'),('11', '11'),('12', '12'),('13', '13'),('14', '14'),('15', '15'),('16', '16'),('17', '17'),('18', '18'),('19', '19'),('20', '20'),('21', '21'),('22', '22'),('23', '23'),('24', '24'),('25', '25'),('26', '26'),('27', '27'),('28', '28'),('29', '29'),('30', '30'),('31', '31')], string="Receipt Date", help="The date on which your receipts")
     ref_rental = fields.Char(string="Identifiant", help="Identifiant de la rental")
     start_rent_date = fields.Date(string="start rented date", required=True)
     end_rent_date = fields.Date(string="end of the lease", required=True)
     payment = fields.Selection([('monthly', 'Monthly'),('bimonthly', 'Bimonthly'),('quarterly', 'Quarterly'),('half-yearly', 'Half-yearly'),('annuel', 'Annuel'),('inclusive', 'Inclusive')], string="payments", required=True)
     rent_without_charges = fields.Float(string="rent without charges", related='estate_rented.rental_price', default=0.0, digits=dp.get_precision('rent without charges'), required=True)
     charges_rent = fields.Float(string="Charges", default=0.0, digits=dp.get_precision('Charges'))
-    rent_with_charges = fields.Float(string="rent charges comprises", default=0.0, digits=dp.get_precision('rent charges comprises'), readonly=True, compute='_rent_charges')
+    rent_with_charges = fields.Float(string="rent included charges", default=0.0, digits=dp.get_precision('rent includedcharges'), readonly=True, compute='_rent_charges')
     late_fees= fields.Float(string='Late Fees (%)', default=0.0, digits=dp.get_precision('Frais de retard (%)'))
     other_payment = fields.Float(string='other payments', digits=dp.get_precision('other payments'))
     description_other_payment = fields.Text(string="other payments : Description")
@@ -37,7 +37,7 @@ class Rental(models.Model):
     company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env['res.company']._company_default_get('lb.rental'), index=1)
     currency_id = fields.Many2one('res.currency', 'Currency', compute='_compute_currency_id')
     doc_count = fields.Integer(compute='_compute_attached_docs_count', string="Documents")
-    partner_a_jour = fields.Selection([('yes', 'yes'),('no', 'No')], string="Le partner est-il à jour ?")
+    partner_up_to_date = fields.Selection([('yes', 'yes'),('no', 'No')], string="is the partner up to date ?")
 
     _sql_constraints = [     
     ('reference_rental_unique',
@@ -68,7 +68,7 @@ class Rental(models.Model):
                 else:
                     r.rental_status = 'inactive'
 
-            # Calcul de la devise
+            # Calculation of the currency
     @api.multi
     def _compute_currency_id(self):
         try:
@@ -123,12 +123,12 @@ class payment(models.Model):
     start_period_date = fields.Date(string="period paid : start", required=True)
     end_period_date = fields.Date(string="period paid : end", required=True)
     paid_amount = fields.Float(string="Paid_amount", default=0.0, digits=dp.get_precision('Montant Payé'), required=True)
-    commentaire_payment = fields.Text(string="Commentaire")
-    objet_payment = fields.Selection([('avance', 'Avance'),('rent', 'rent du mois'),('pénalité', 'Pénalités'),('other payments', 'others payments')], string="Objet du payment")
+    commentment_payment = fields.Text(string="Commetment")
+    payment_object = fields.Selection([('advance', 'Advance'),('rent', 'rent of the month'),('penalty', 'penalties'),('other payments', 'others payments')], string="Objet du payment")
     company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env['res.company']._company_default_get('lb.rental'), index=1)
     currency_id = fields.Many2one('res.currency', 'Currency', compute='_compute_currency_id')
 
-            # Calcul de la devise
+            # Calculation of the currency
     @api.multi
     def _compute_currency_id(self):
         try:
