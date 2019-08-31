@@ -1,10 +1,10 @@
 <odoo>
     <data>
-        <record id="acces_module_rental_lessor" model="res.groups">
-            <field name="name">Access Lessor</field>
+        <record id="acces_module_rental_estate" model="res.groups">
+            <field name="name">Acces estate</field>
         </record>
-        <record id="acces_module_rental_partner" model="res.groups">
-            <field name="name">Acces Partner</field>
+        <record id="acces_module_rental_lessor" model="res.groups">
+            <field name="name">Acces lessor</field>
         </record>
         <record id="acces_module_rental_type" model="res.groups">
             <field name="name">Acces Type</field>
@@ -15,25 +15,25 @@
         <record id="acces_module_rental_payment" model="res.groups">
             <field name="name">Acces payment</field>
         </record>
-        <record id="acces_module_rental_estate_status" model="res.groups">
-            <field name="name">Acces estate Status</field>
+        <record id="acces_module_rental_contract_status" model="res.groups">
+            <field name="name">Acces Contract Status</field>
         </record>
-        <record id="acces_module_rental_registering_estate_status" model="res.groups">
-            <field name="name">Acces Registring estate</field>
+        <record id="acces_module_rental_registring" model="res.groups">
+            <field name="name">Acces registring estate</field>
         </record>
-	<record id="acces_module_rental_owner" model="res.groups">
-            <field name="name">Acces estate Owner</field>
+	        <record id="acces_module_rental_owner" model="res.groups">
+            <field name="name">Acces owner</field>
         </record>
-	<record id="acces_module_potential_partner" model="res.groups">
-            <field name="name">Acces Potentiel Partner</field>
+	    <record id="acces_module_potential_partner" model="res.groups">
+            <field name="name">Acces Locataire Potentiel</field>
         </record>
-	<record id="acces_module_contact" model="res.groups">
+	    <record id="acces_module_contact" model="res.groups">
             <field name="name">Acces Contact</field>
         </record>
-	<record id="acces_module_district" model="res.groups">
+	    <record id="acces_module_district" model="res.groups">
             <field name="name">Acces District</field>
         </record>
-	<record id="acces_module_city" model="res.groups">
+	    <record id="acces_module_city" model="res.groups">
             <field name="name">Acces City</field>
         </record>
     </data>
