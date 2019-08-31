@@ -25,7 +25,7 @@
             <field name="name">Acces owner</field>
         </record>
 	    <record id="acces_module_potential_partner" model="res.groups">
-            <field name="name">Acces Locataire Potentiel</field>
+            <field name="name">Acces Potential Partner</field>
         </record>
 	    <record id="acces_module_contact" model="res.groups">
             <field name="name">Acces Contact</field>
