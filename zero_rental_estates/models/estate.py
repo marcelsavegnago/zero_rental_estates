@@ -7,7 +7,7 @@ from odoo.exceptions import UserError, AccessError
 from odoo.tools.safe_eval import safe_eval
 from odoo.addons import decimal_precision as dp
 
-class estate(models.Model):
+class Estate(models.Model):
     _name = 'lb.estate'
     _rec_name = 'street'
 
