@@ -2,7 +2,7 @@
 
 {
     'name': 'rental_estate_management',
-    'version': '11.0.1',
+    'version': '11.0.1.0',
     'summary': """rental property management""",
     'description': """This module helps you to Manage rental property""",
     'category': 'real estate',
@@ -10,7 +10,7 @@
     'company': 'Zero for Information Systems',
     'website': "https://www.erpzero.com",
     'email': "sales@erpzero.com",
-    'depends': ['base','mail','portal','resource','analytic','contacts'],
+    'depends': ['base','mail','portal','resource','analytic',],
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
