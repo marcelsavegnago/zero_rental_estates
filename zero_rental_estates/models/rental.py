@@ -25,7 +25,7 @@ class Rental(models.Model):
     start_rent_date = fields.Date(string="start rented date", required=True)
     end_rent_date = fields.Date(string="end of the lease", required=True)
     payment = fields.Selection([('monthly', 'Monthly'),('bimonthly', 'Bimonthly'),('quarterly', 'Quarterly'),('half-yearly', 'Half-yearly'),('annuel', 'Annuel'),('inclusive', 'Inclusive')], string="payments", required=True)
-    rent_without_charges = fields.Float(string="rent without charges", related='estate_rented.charges_rent', default=0.0, digits=dp.get_precision('rent without charges'), required=True)
+    rent_without_charges = fields.Float(string="rent without charges", related='estate_rented.rental_price', default=0.0, digits=dp.get_precision('rent without charges'), required=True)
     charges_rent = fields.Float(string="Charges", default=0.0, digits=dp.get_precision('Charges'))
     rent_with_charges = fields.Float(string="rent charges comprises", default=0.0, digits=dp.get_precision('rent charges comprises'), readonly=True, compute='_rent_charges')
     late_fees= fields.Float(string='Late Fees (%)', default=0.0, digits=dp.get_precision('Frais de retard (%)'))
