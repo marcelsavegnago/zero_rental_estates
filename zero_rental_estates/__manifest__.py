@@ -10,7 +10,7 @@
     'company': 'Zero for Information Systems',
     'website': "https://www.erpzero.com",
     'email': "sales@erpzero.com",
-    'depends': ['base','mail','portal','resource','analytic'],
+    'depends': ['base','mail','portal','resource','analytic','contacts'],
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
