@@ -15,10 +15,10 @@
         <record id="acces_module_rental_payment" model="res.groups">
             <field name="name">Acces payment</field>
         </record>
-        <record id="acces_module_rental_contract_status" model="res.groups">
+        <record id="acces_module_rental_estate_status" model="res.groups">
             <field name="name">Acces Contract Status</field>
         </record>
-        <record id="acces_module_rental_registring" model="res.groups">
+        <record id="acces_module_rental_registringestate" model="res.groups">
             <field name="name">Acces registring estate</field>
         </record>
 	        <record id="acces_module_rental_owner" model="res.groups">
