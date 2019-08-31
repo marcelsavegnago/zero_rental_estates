@@ -9,13 +9,13 @@ class city(models.Model):
     _name = 'lb.city'
     _rec_name = 'name'
 
-    name = fields.Char(string="city")
+    name = fields.Char(string="City")
 
 
 class district(models.Model):
     _name = 'lb.district'
     _rec_name = 'district_name'
 
-    district_name = fields.Char(string="district")
-    associated_city = fields.Many2one('lb.city')
+    district_name = fields.Char(string="District")
+    city_partner = fields.Many2one('lb.city')
 
