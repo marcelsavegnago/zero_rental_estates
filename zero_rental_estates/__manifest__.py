@@ -11,8 +11,7 @@
     'website': "https://www.erpzero.com",
     'email': "sales@erpzero.com",
     'depends': ['base','mail','portal','resource','analytic'],
-    'data': [
-        'security/security.xml','security/ir.model.access.csv','views/city_districts_view.xml','views/lessor_view.xml','views/partner_view.xml','views/payment_report.xml','views/rental_view.xml','views/estate_status_view.xml','views/estate_view.xml,
+    'data': ['security/security.xml','security/ir.model.access.csv','views/city_districts_view.xml','views/lessor_view.xml','views/partner_view.xml','views/payment_report.xml','views/rental_view.xml','views/estate_status_view.xml','views/estate_view.xml,
     ],
     'images': ['static/description/logo.PNG'],
     'demo': [],
