@@ -1,19 +1,19 @@
 <odoo>
     <data>
         <record id="acces_module_rental_lessor" model="res.groups">
-            <field name="name">Acces Rental Lessor</field>
+            <field name="name">Access Lessor</field>
         </record>
         <record id="acces_module_rental_partner" model="res.groups">
-            <field name="name">Acces Rental Partner</field>
+            <field name="name">Acces Partner</field>
         </record>
         <record id="acces_module_rental_type" model="res.groups">
-            <field name="name">Acces Rental Type</field>
+            <field name="name">Acces Type</field>
         </record>
         <record id="acces_module_rental_rental" model="res.groups">
             <field name="name">Acces rental</field>
         </record>
         <record id="acces_module_rental_payment" model="res.groups">
-            <field name="name">Acces Rental payment</field>
+            <field name="name">Acces payment</field>
         </record>
         <record id="acces_module_rental_estate_status" model="res.groups">
             <field name="name">Acces estate Status</field>
