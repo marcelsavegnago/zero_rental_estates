@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from . import city_districts
+from . import city_district
 from . import lessor
 from . import partner
 from . import potential_partner
