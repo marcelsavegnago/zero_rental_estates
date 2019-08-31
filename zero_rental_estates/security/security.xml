@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+        <record id="acces_module_rental_lessor" model="res.groups">
+            <field name="name">Acces Rental Lessor</field>
+        </record>
+        <record id="acces_module_rental_partner" model="res.groups">
+            <field name="name">Acces Rental Partner</field>
+        </record>
+        <record id="acces_module_rental_type" model="res.groups">
+            <field name="name">Acces Rental Type</field>
+        </record>
+        <record id="acces_module_rental_rental" model="res.groups">
+            <field name="name">Acces rental</field>
+        </record>
+        <record id="acces_module_rental_payment" model="res.groups">
+            <field name="name">Acces Rental payment</field>
+        </record>
+        <record id="acces_module_rental_estate_status" model="res.groups">
+            <field name="name">Acces estate Status</field>
+        </record>
+        <record id="acces_module_rental_registering_estate_status" model="res.groups">
+            <field name="name">Acces Registring estate</field>
+        </record>
+	<record id="acces_module_rental_owner" model="res.groups">
+            <field name="name">Acces estate Owner</field>
+        </record>
+	<record id="acces_module_potential_partner" model="res.groups">
+            <field name="name">Acces Potentiel Partner</field>
+        </record>
+	<record id="acces_module_contact" model="res.groups">
+            <field name="name">Acces Contact</field>
+        </record>
+	<record id="acces_module_district" model="res.groups">
+            <field name="name">Acces District</field>
+        </record>
+	<record id="acces_module_city" model="res.groups">
+            <field name="name">Acces City</field>
+        </record>
+    </data>
+</odoo>

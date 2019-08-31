@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+          <!-- estate form view -->
+
+	<record model="ir.ui.view" id="estate_form_view">
+            <field name="name">estate.form</field>
+            <field name="model">lb.estate</field>
+            <field name="arch" type="xml">
+                <form string="estate Form">
+                    <sheet>
+                    <div class="oe_title">
+                        <h1>
+                        <field name="name" default_focus="1" placeholder="Complet name"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="civilite" options="{&quot;no_open&quot;: True}"/>
+							<label for="Street" string="street"/>
+                            <div class="o_address_format">
+                                <field name="street" placeholder="Adresse ..." class="o_address_street"/>
+                                <field name="postal_code" placeholder="Postal_Code"/><br></br>
+                                <field name="City" placeholder="City" class="o_address_city"/><br></br>
+                                <field name="paid_id" placeholder="paid" class="o_address_country"/>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="email" widget="email"/>
+                            <field name="telephone" widget="phone"/>
+                            <field name="jop_title"/>
+                        </group>
+                    </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- estate tree view -->
+
+        <record model="ir.ui.view" id="estate_tree_view">
+            <field name="name">estate.tree</field>
+            <field name="model">lb.estate</field>
+            <field name="arch" type="xml">
+                <tree string="estate Tree">
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="telephone"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- estate search view -->
+        <record id="view_estate_filter" model="ir.ui.view">
+            <field name="name">search estate</field>
+            <field name="model">lb.estate</field>
+            <field name="arch" type="xml">
+                <search string="search estate">
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="telephone"/>
+                </search>
+            </field>
+        </record>
+
+
+
+        <record model="ir.actions.act_window" id="estate_list_action">
+            <field name="name">estate</field>
+            <field name="res_model">lb.estate</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_estate_filter"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create a new estate
+                </p>
+            </field>
+        </record>
+
+
+        <menuitem id="estate_menu" name="estate"
+                  parent="estate_rental_app_menu"
+                  action="estate_list_action" sequence="2"/>
+
+
+    </data>
+</odoo>

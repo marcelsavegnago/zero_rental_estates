@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- payment report Tree View-->
+
+        <record model="ir.ui.view" id="payment_report_tree_view">
+            <field name="name">payment.report.tree</field>
+            <field name="model">lb.payment</field>
+            <field name="arch" type="xml">
+                <tree string="payment report Tree" create="false">
+                    <field name="rent_status_id"/>
+                    <field name="payment_id" string="estate"/>
+                    <field name="lessor_id"/>
+                    <field name="end_rent_date_id"/>
+                    <field name="payment_date"/>
+                    <field name="payment_object"/>
+                    <field name="paid_amount" sum="Payments Total"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- payment report Form View-->
+
+        <record model="ir.ui.view" id="payment_report_form_view">
+            <field name="name">payment.report.form</field>
+            <field name="model">lb.payment</field>
+            <field name="arch" type="xml">
+                <form string="payment report Form" create="false" edit="false">
+					<sheet>
+					    <group>
+							<field name="rent_status_id"/>
+							<field name="payment_id"/>
+							<field name="lessor_id"/>
+							<field name="end_rent_date_id"/>
+							<field name="payment_date"/>
+							<field name="payment_object"/>
+							<field name="paid_amount" sum="Payments Total"/>
+					    </group>
+					</sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- payment report search view -->
+        <record id="view_payment_report_filter" model="ir.ui.view">
+            <field name="name">Search in payment report</field>
+            <field name="model">lb.payment</field>
+            <field name="arch" type="xml">
+                <search string="Search rental">
+                    <field name="lessor_id"/>
+                    <field name="end_rent_date_id"/>
+                    <field name="payment_date"/>
+                    <field name="payment_object"/>
+                    <field name="paid_amount"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="payment_report_list_action">
+            <field name="name">payment report</field>
+            <field name="res_model">lb.payment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_payment_report_filter"/>
+        </record>
+
+
+        <menuitem id="report_menu" name="reports"
+                  parent="estate_rental_app_menu" sequence="7"/>
+        <menuitem id="report_report_menu" name="payments report"
+                  parent="report_menu"
+                  action="payment_report_list_action"/>
+
+    </data>
+</odoo>

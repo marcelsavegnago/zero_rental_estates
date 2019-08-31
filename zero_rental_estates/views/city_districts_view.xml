@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- city form view -->
+
+	<record model="ir.ui.view" id="city_form_view">
+            <field name="name">city.form</field>
+            <field name="model">lb.city</field>
+            <field name="arch" type="xml">
+                <form string="city Form">
+                    <sheet>
+					<group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+					</group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- city tree view -->
+
+        <record model="ir.ui.view" id="city_tree_view">
+            <field name="name">city.tree</field>
+            <field name="model">lb.city</field>
+            <field name="arch" type="xml">
+                <tree string="city Tree">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="city_list_action">
+            <field name="name">cities</field>
+            <field name="res_model">lb.city</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Enter here the cities in which the real estate agency manages property
+                </p>
+            </field>
+        </record>
+
+
+        <!-- district form view -->
+
+	<record model="ir.ui.view" id="district_form_view">
+            <field name="name">district.form</field>
+            <field name="model">lb.district</field>
+            <field name="arch" type="xml">
+                <form string="district Form">
+                    <sheet>
+					<group>
+                        <group>
+                            <field name="name_district"/>
+                            <field name="city_partner"/>
+                        </group>
+					</group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- district tree view -->
+
+        <record model="ir.ui.view" id="district_tree_view">
+            <field name="name">district.tree</field>
+            <field name="model">lb.district</field>
+            <field name="arch" type="xml">
+                <tree string="district Tree">
+                    <field name="name_district"/>
+                    <field name="city_partner" string="city"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window"id="district_list_action">
+            <field name="name">district</field>
+            <field name="res_model">lb.district</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Enter here the districts in which the real estate Enter here the districts of real estate agency of property
+                </p>
+            </field>
+        </record>
+
+
+        <menuitem id="city_districts_menu" name="cities and districts"
+                  parent="estate_rental_app_menu" sequence="1"/>
+
+        <menuitem id="city_menu" name="cities"
+                  parent="cities_districts_menu"
+                  action="city_list_action" sequence="1"/>
+
+        <menuitem id="district_menu" name="districts"
+                  parent="cities_districts_menu"
+                  action="district_list_action" sequence="2"/>
+
+    </data>
+</odoo>

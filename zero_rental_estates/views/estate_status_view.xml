@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+       <!-- estate_status form view -->
+
+	<record model="ir.ui.view" id="estate_status_form_view">
+            <field name="name">estate_status.form</field>
+            <field name="model">lb.estate_status</field>
+            <field name="arch" type="xml">
+                <form string="estate status Form">
+                    <sheet>
+                    <div class="oe_button_box" name="button_box" groups="base.group_user">
+                        <button class="oe_stat_button" name="attachment_tree_view" type="object" icon="fa-files-o">
+                            <field string="Images" name="doc_count" widget="statinfo"/>
+                        </button>
+					</div>
+                    <group>
+                        <group>
+                            <field name="estate_status_type"/>
+                            <field name="date_estate_status"/>
+                            <field name="ref_estate_status"/>
+                            <field name="lessor"/>
+                            <field name="estate_status_entry_partner" attrs="{'invisible': [('estate_status_type', '=', 'entry')]}"/>
+                        </group>
+                        <group>
+                            <field name="notes" placeholder="note interne..."/>
+                        </group>
+                    </group>
+                        <notebook>
+                            <page string="estate status">
+                                <field name="registering_estate_status">
+                                    <tree string="estate status">
+                                        <field name="estate_name"/>
+                                        <field name="Status"/>
+                                    </tree>
+                                </field>
+							</page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- estate status tree view -->
+
+        <record model="ir.ui.view" id="estate_status_tree_view">
+            <field name="name">estate_status.tree</field>
+            <field name="model">lb.estate_status</field>
+            <field name="arch" type="xml">
+                <tree string="estate status Tree">
+                    <field name="estate_status_type"/>
+                    <field name="date_estate_status"/>
+                    <field name="lessor"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- estate status search view -->
+        <record id="view_estate_status_filter" model="ir.ui.view">
+            <field name="name">Search estate status</field>
+            <field name="model">lb.estate_status</field>
+            <field name="arch" type="xml">
+                <search string="Search estate status">
+                    <field name="estate_status_type"/>
+                    <field name="date_estate_status"/>
+                    <field name="lessor"/>
+                    <field name="ref_estate_status"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="estate_status_list_action">
+            <field name="name">estate status</field>
+            <field name="res_model">lb.estate_status</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_estate_status_filter"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create a new estate status
+                </p>
+            </field>
+        </record>
+
+        <!-- registering estate status form view -->
+
+        <record model="ir.ui.view" id="registering_estate_status_form_view">
+            <field name="name">registering_estate_status.form</field>
+            <field name="model">lb.registering_estate_status</field>
+            <field name="arch" type="xml">
+                <form string="registering estate status Form">
+                    <sheet>
+					<group>
+                        <group>
+                            <field name="registering_estate"/>
+                            <field name="Status"/>
+                            <field name="comment"/>
+                        </group>
+					</group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+		
+		
+
+        <record model="ir.actions.act_window" id="garant_list_action">
+            <field name="name">registering estate status</field>
+            <field name="res_model">lb.registering_estate_status</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem id="estate_status_menu" name="estate status"
+                  parent="estate_rental_app_menu"
+                  action="estate_status_list_action" sequence="6"/>
+
+
+    </data>
+</odoo>
