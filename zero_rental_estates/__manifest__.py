@@ -12,9 +12,9 @@
     'category': 'real estate',
     'version': '11.0.0.1',
     'installable': True,
-    
-
-    # any module necessary for this one to work correctly
+    'auto_install': False,
+    'application': True,
+     # any module necessary for this one to work correctly
     'depends': ['base','mail','portal','resource','analytic'],
     'images': ['static/description/logo.PNG'],
     # always loaded
