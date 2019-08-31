@@ -7,7 +7,7 @@ from odoo.exceptions import UserError, AccessError
 from odoo.tools.safe_eval import safe_eval
 from odoo.addons import decimal_precision as dp
 
-class potentialpartner(models.Model):
+class Potentialpartner(models.Model):
     _name = 'lb.potential_partner'
     _rec_name = 'name'
 
