@@ -11,7 +11,7 @@ class City(models.Model):
     _name = 'lb.city'
     _rec_name = 'name'
 
-    nom = fields.Char(string="City")
+    name = fields.Char(string="City")
 
 
 class District(models.Model):
