@@ -8,7 +8,7 @@ from odoo.osv import expression
 from odoo.addons import decimal_precision as dp
     
 
-class partner(models.Model):
+class Partner(models.Model):
     _inherit = 'res.partner'
 
     identity_type = fields.Selection([('NCI','National card d\'identity'),('Visit_Card','Visa Cart'),('passport','Passport')],string='Type of identity d\'identity')
