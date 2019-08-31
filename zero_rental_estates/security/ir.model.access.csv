@@ -1,13 +1,9 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 normal_user,Normal User,model_lb_lessor,acces_module_rental_lessor,1,1,1,1
-normal_user1,Normal User,model_lb_type,acces_module_rental_type,1,1,1,1
 normal_user2,Normal User,model_res_partner,acces_module_rental_partner,1,1,1,1
 normal_user3,Normal User,model_lb_rental,acces_module_rental_rental,1,1,1,1
 normal_user4,Normal User,model_lb_payment,acces_module_rental_payment,1,1,1,1
 normal_user5,Normal User,model_lb_estate_status,acces_module_rental_estate_status,1,1,1,1
-normal_user6,Normal User,model_lb_registering_estate_status,acces_module_rental_registering_estate_status,1,1,1,1
-normal_user7,Normal User,model_lb_lessor,acces_module_rental_owner,1,1,1,1
 normal_user8,Normal User,model_lb_potential_partner,acces_module_potential_partner,1,1,1,1
-normal_user9,Normal User,model_lb_contact,acces_module_contact,1,1,1,1
 normal_user10,Normal User,model_lb_district,acces_module_district,1,1,1,1
 normal_user11,Normal User,model_lb_city,acces_module_city,1,1,1,1
