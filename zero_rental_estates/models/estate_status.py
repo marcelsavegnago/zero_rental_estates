@@ -8,7 +8,7 @@ from odoo.addons import decimal_precision as dp
 
     
 
-class estate_status(models.Model):
+class Estate_status(models.Model):
     _name = 'lb.estate_status'
     _rec_name = 'ref_estate_status'
 
