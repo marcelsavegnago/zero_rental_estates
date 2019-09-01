@@ -12,11 +12,11 @@ class Estate_status(models.Model):
     _name = 'lb.estate_status'
     _rec_name = 'ref_estate_status'
 
-    estate_status_type = fields.Selection([('entry', 'estate status d\'entry'),('sortie', 'estate status exit')], string="Type", required=True)
+    estate_status_type = fields.Selection([('entry', 'estate status d\'entry'),('exit', 'estate status exit')], string="Type", required=True)
     estate_status_date = fields.Date(string="Date", required=True)
     ref_estate_status = fields.Char(string="estate code", help="unique code for estate status")
     notes = fields.Text(string="Notes")
-    partner = fields.Many2one('lb.partner', ondelete='cascade', string="Related Partner", required=True)
+    rental = fields.Many2one('lb.rental', ondelete='cascade', string="Related rental", required=True)
     registering_estate_status = fields.One2many('lb.registering_estate_status', 'estate_status_id', string="estate Status")
     estate_status_entry_partner = fields.Many2one('lb.estate_status', string="estate Statusd'entry partner", domain=[('estate_status_type', '=', 'entry')])
     doc_count = fields.Integer(compute='_compute_attached_docs_count', string="Documents")	
