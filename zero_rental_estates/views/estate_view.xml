@@ -1,66 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-
-          <!-- estate form view -->
-
-	<record model="ir.ui.view" id="estate_form_view">
+        <!-- estates form view -->
+        <record model="ir.ui.view" id="estate_form_view">
             <field name="name">estate.form</field>
             <field name="model">lb.estate</field>
             <field name="arch" type="xml">
                 <form string="estate Form">
                     <sheet>
-                    <div class="oe_title">
-                        <h1>
-                        <field name="name" default_focus="1" placeholder="Complet name"/>
-                        </h1>
-                    </div>
-
-                    <group>
+                    <div class="oe_button_box" name="button_box" groups="base.group_user">
+                        <button class="oe_stat_button" name="attachment_tree_view" type="object" icon="fa-files-o">
+                            <field string="Images" name="doc_count" widget="statinfo"/>
+                        </button>
+					</div>
                         <group>
-                            <field name="civilite" options="{&quot;no_open&quot;: True}"/>
-							<label for="Street" string="street"/>
+                            <group>
+								<field name="lessor_id"/>
+							<label for="street" string="Address"/>
                             <div class="o_address_format">
-                                <field name="street" placeholder="Adresse ..." class="o_address_street"/>
-                                <field name="postal_code" placeholder="Postal_Code"/><br></br>
-                                <field name="City" placeholder="City" class="o_address_city"/><br></br>
-                                <field name="paid_id" placeholder="paid" class="o_address_country"/>
+                                <field name="street" placeholder="Address ..." class="o_address_street"/>
+                                <field name="district" placeholder="District"/><br></br>
+                                <field name="postale_code" placeholder="Postale_code"/><br></br>
+                                <field name="city" placeholder="city" class="o_address_city"/><br></br>
+                                <field name="country" placeholder="country" class="o_address_country"/>
                             </div>
+                            </group>
+                            <group>							
+								<field name="type_id"/>
+								<label for="area"/>
+								<div class="o_row" name="area">
+									<field name="area"/>
+									<span>m²</span>
+								</div>
+								<field name="reference"/>
+                                    <field name="currency_id" invisible="1"/>
+								<field name="description"/>
+								<field name="rent_price" widget="monetary"/>
+                            </group>
                         </group>
-                        <group>
-                            <field name="email" widget="email"/>
-                            <field name="telephone" widget="phone"/>
-                            <field name="jop_title"/>
-                        </group>
-                    </group>
+                        <notebook>
+                            <page string="Notes">
+                                <group>
+									<field name="notes"/>
+								</group>
+							</page>
+						</notebook>
                     </sheet>
                 </form>
             </field>
         </record>
 
-        <!-- estate tree view -->
+        <!-- estates tree view -->
 
         <record model="ir.ui.view" id="estate_tree_view">
             <field name="name">estate.tree</field>
             <field name="model">lb.estate</field>
             <field name="arch" type="xml">
                 <tree string="estate Tree">
-                    <field name="name"/>
-                    <field name="email"/>
-                    <field name="telephone"/>
+                    <field name="type_id"/>
+                    <field name="street" string="Address"/>
+                    <field name="lessor_id"/>
+                    <field name="district"/>
+                    <field name="city"/>
+                    <field name="country"/>
                 </tree>
             </field>
         </record>
 
-        <!-- estate search view -->
+        <!-- estates search view -->
+
         <record id="view_estate_filter" model="ir.ui.view">
-            <field name="name">search estate</field>
+            <field name="name">Search estate</field>
             <field name="model">lb.estate</field>
             <field name="arch" type="xml">
-                <search string="search estate">
-                    <field name="name"/>
-                    <field name="email"/>
-                    <field name="telephone"/>
+                <search string="Search estate">
+                    <field name="lessor_id"/>
+                    <field name="type_id"/>
+                    <field name="street"/>
+                    <field name="reference"/>
+                    <field name="city"/>
+                    <field name="country"/>
                 </search>
             </field>
         </record>
@@ -68,22 +87,70 @@
 
 
         <record model="ir.actions.act_window" id="estate_list_action">
-            <field name="name">estate</field>
+            <field name="name">estates</field>
             <field name="res_model">lb.estate</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="view_estate_filter"/>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
-                    Create a new estate
+                    Créer a new estate
+                </p>
+            </field>
+        </record>
+		
+        <!-- Type_estate form view -->
+
+        <record model="ir.ui.view" id="type_form_view">
+            <field name="name">type.form</field>
+            <field name="model">lb.type</field>
+            <field name="arch" type="xml">
+                <form string="Type Form">
+                    <sheet>
+                        <group>
+                            <field name="type"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="type_tree_view">
+            <field name="name">type.tree</field>
+            <field name="model">lb.type</field>
+            <field name="arch" type="xml">
+                <tree string="Type Tree">
+                    <field name="type"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="type_list_action">
+            <field name="name">Types of estates</field>
+            <field name="res_model">lb.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create a new Type
                 </p>
             </field>
         </record>
 
 
-        <menuitem id="estate_menu" name="estate"
-                  parent="estate_rental_app_menu"
-                  action="estate_list_action" sequence="2"/>
+
+        <menuitem id="main_rental_app_menu" name="rental of estates"/>
+        <menuitem id="rental_app_menu" name="rental of estates"
+                  parent="main_rental_app_menu"/>
+        <menuitem id="estate_menu" name="estates"
+                  parent="rental_app_menu" sequence="3"/>
+        <menuitem id="estate_estate_menu" name="estates"
+                  parent="estate_menu" sequence="2"
+                  action="estate_list_action"/>
+        <menuitem id="type_menu" name="Types of estates"
+                  parent="estate_menu"
+                  action="type_list_action" sequence="1"/>
 
 
     </data>
