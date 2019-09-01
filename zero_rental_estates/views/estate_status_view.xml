@@ -20,8 +20,8 @@
                             <field name="estate_status_type"/>
                             <field name="date_estate_status"/>
                             <field name="ref_estate_status"/>
-                            <field name="lessor"/>
-                            <field name="estate_status_entry_partner" attrs="{'invisible': [('estate_status_type', '=', 'entry')]}"/>
+                            <field name="rental"/>
+                            <field name="estate_status_entry_rental" attrs="{'invisible': [('estate_status_type', '=', 'entry')]}"/>
                         </group>
                         <group>
                             <field name="notes" placeholder="note interne..."/>
@@ -51,7 +51,7 @@
                 <tree string="estate status Tree">
                     <field name="estate_status_type"/>
                     <field name="date_estate_status"/>
-                    <field name="lessor"/>
+                    <field name="rental"/>
                 </tree>
             </field>
         </record>
@@ -64,7 +64,7 @@
                 <search string="Search estate status">
                     <field name="estate_status_type"/>
                     <field name="date_estate_status"/>
-                    <field name="lessor"/>
+                    <field name="rental"/>
                     <field name="ref_estate_status"/>
                 </search>
             </field>
