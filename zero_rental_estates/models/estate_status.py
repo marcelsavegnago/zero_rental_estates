@@ -53,7 +53,7 @@ class Estate_status(models.Model):
         }
 
 
-class registering_estate_status(models.Model):
+class Registering_estate_status(models.Model):
     _name = 'lb.registering_estate_status'
 
     estate_status_id = fields.Many2one('lb.estate_status', ondelete='cascade', string="estate Status")
