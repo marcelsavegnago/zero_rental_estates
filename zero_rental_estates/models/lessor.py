@@ -1,89 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<odoo>
-    <data>
-        <!-- Bailleur form view -->
+# -*- coding: utf-8 -*-
 
-		<record model="ir.ui.view" id="bailleur_form_view">
-            <field name="name">bailleur.form</field>
-            <field name="model">lb.bailleur</field>
-            <field name="arch" type="xml">
-                <form string="Bailleur Form">
-                    <sheet>
-                    <div class="oe_title">
-                        <h1>
-                        <field name="nom" default_focus="1" placeholder="Complete Name"/>
-                        </h1>
-                    </div>
+from odoo import api, fields, models, tools, _
+from odoo.tools import float_compare, pycompat
+from odoo.exceptions import ValidationError
+from odoo.osv import expression
 
-                    <group>
-                        <group>
-                            <field name="civilite" options="{&quot;no_open&quot;: True}"/>
-							<label for="Rue" string="Adresse"/>
-                            <div class="o_address_format">
-                                <field name="rue" placeholder="Address ..." class="o_address_street"/>
-                                <field name="code_postale" placeholder="Postal Code"/><br></br>
-                                <field name="ville" placeholder="City" class="o_address_city"/><br></br>
-                                <field name="pays_id" placeholder="Country" class="o_address_country"/>
-                            </div>
-                        </group>
-                        <group>
-                            <field name="email" widget="email"/>
-                            <field name="telephone" widget="phone"/>
-                            <field name="Position"/>
-                        </group>
-                    </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
-
-        <!-- Bailleur tree view -->
-
-        <record model="ir.ui.view" id="bailleurs_tree_view">
-            <field name="name">bailleur.tree</field>
-            <field name="model">lb.bailleur</field>
-            <field name="arch" type="xml">
-                <tree string="Bailleur Tree">
-                    <field name="nom"/>
-                    <field name="email"/>
-                    <field name="telephone"/>
-                </tree>
-            </field>
-        </record>
-
-        <!-- Bailleur search view -->
-        <record id="view_bailleur_filter" model="ir.ui.view">
-            <field name="name">Search Lessor</field>
-            <field name="model">lb.bailleur</field>
-            <field name="arch" type="xml">
-                <search string="Search Lessor">
-                    <field name="nom"/>
-                    <field name="email"/>
-                    <field name="telephone"/>
-                </search>
-            </field>
-        </record>
+from odoo.addons import decimal_precision as dp
 
 
+class Lessor(models.Model):
+    _name = 'lb.lessor'
+    _rec_name = 'name'
 
-        <record model="ir.actions.act_window" id="bailleur_list_action">
-            <field name="name">Bailleurs</field>
-            <field name="res_model">lb.bailleur</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="search_view_id" ref="view_bailleur_filter"/>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">
-                    Create New Lessor
-                </p>
-            </field>
-        </record>
+	        # Get default country
+    @api.model
+    def _get_default_country(self):
+        country = self.env['res.country'].search([('code', '=', 'EG')], limit=1)
+        return country
 
-
-        <menuitem id="bailleur_menu" name="Bailleurs"
-                  parent="rental_app_menu"
-                  action="bailleur_list_action" sequence="2"/>
-
-
-    </data>
-</odoo>
+    name = fields.Char(string="Name", required=True)
+    greeting = fields.Selection([('m.', 'M.'),('mrs', 'Mrs'),('ms', 'Ms'),('m. and mrs','M. and Mrs')], string="Greeting") 
+    email = fields.Char(string="E-mail", required=True)
+    telephone = fields.Char(string="Telephone", required=True)
+    street = fields.Char()
+    postal_code = fields.Char(string="Code Postal")
+    city = fields.Char(string="City")
+    country_id = fields.Many2one('res.country', string='Countries', default=_get_default_country, ondelete='restrict')
+    title = fields.Char(string="Title", help="Professional activity of the owner")
