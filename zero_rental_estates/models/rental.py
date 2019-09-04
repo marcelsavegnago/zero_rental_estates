@@ -14,41 +14,41 @@ from odoo.addons import decimal_precision as dp
 
 class Rental(models.Model):
     _name = 'lb.rental'
-    _rec_name = 'estate_rented'
+    _rec_name = 'estate_contract'
 
-    estate_rented = fields.Many2one('lb.estate', ondelete='cascade', string="estate rented", required=True)
-    partner = fields.Many2one('res.partner', ondelete='cascade', string="partner", required=True)
-    rental_status = fields.Selection([('inactive', 'Inactive'),('active', 'active')], string="Statut", compute='update_statut', help="Statut de la rental (active : rental en cours)")
-    utilization = fields.Selection([('utilization1', 'utilization main if partner'),('utilization2', 'utilization secondary of partner'),('utilization3', 'utilization professional')], string="utilization")
-    receipt_date = fields.Selection([('1', '1'),('2', '2'),('3', '3'),('4', '4'),('5', '5'),('6', '6'),('7', '7'),('8', '8'),('9', '9'),('10', '10'),('11', '11'),('12', '12'),('13', '13'),('14', '14'),('15', '15'),('16', '16'),('17', '17'),('18', '18'),('19', '19'),('20', '20'),('21', '21'),('22', '22'),('23', '23'),('24', '24'),('25', '25'),('26', '26'),('27', '27'),('28', '28'),('29', '29'),('30', '30'),('31', '31')], string="Receipt Date", help="The date on which your receipts")
-    ref_rental = fields.Char(string="Identifiant", help="Identifiant de la rental")
-    start_rent_date = fields.Date(string="start rented date", required=True)
-    end_rent_date = fields.Date(string="end of the lease", required=True)
-    payment = fields.Selection([('monthly', 'Monthly'),('bimonthly', 'Bimonthly'),('quarterly', 'Quarterly'),('half-yearly', 'Half-yearly'),('annuel', 'Annuel'),('inclusive', 'Inclusive')], string="payments", required=True)
-    rent_without_charges = fields.Float(string="rent without charges", related='estate_rented.rental_price', default=0.0, digits=dp.get_precision('rent without charges'), required=True)
-    charges_rent = fields.Float(string="Charges", default=0.0, digits=dp.get_precision('Charges'))
-    rent_with_charges = fields.Float(string="rent included charges", default=0.0, digits=dp.get_precision('rent includedcharges'), readonly=True, compute='_rent_charges')
-    late_fees= fields.Float(string='Late Fees (%)', default=0.0, digits=dp.get_precision('Frais de retard (%)'))
+    estate_contract = fields.Many2one('lb.estate', ondelete='cascade', string="Estate Contract", required=True)
+    tenants = fields.Many2one('res.partner', ondelete='cascade', string="tenant", required=True)
+    #statut_rental = fields.Selection([('inactive', 'Inactive'),('active', 'Active')], string="Statut", compute='update_statut', help="Statut de la rental (Active : Rental inprogress)")
+    utilization = fields.Selection([('utilization1', 'utilization main tenant'),('utilization2', 'utilization secondery of tenant'),('utilization3', 'utilization professional')], string="utilization")
+    receip_date = fields.Selection([('1', '1'),('2', '2'),('3', '3'),('4', '4'),('5', '5'),('6', '6'),('7', '7'),('8', '8'),('9', '9'),('10', '10'),('11', '11'),('12', '12'),('13', '13'),('14', '14'),('15', '15'),('16', '16'),('17', '17'),('18', '18'),('19', '19'),('20', '20'),('21', '21'),('22', '22'),('23', '23'),('24', '24'),('25', '25'),('26', '26'),('27', '27'),('28', '28'),('29', '29'),('30', '30'),('31', '31')], string="Date of receipt", help="The date on which your receipts would be dates")
+    ref_rental = fields.Char(string="Identifier", help="Identifier of the rental")
+    from_date = fields.Date(string="From Date", required=True)
+    to_date = fields.Date(string="To Date", required=True)
+    payment = fields.Selection([('monthly', 'Monthly'),('bimonthly', 'Bimonthly'),('quarterly', 'Quarterly'),('half-yearly', 'Half-yearly'),('annuel', 'Annuel'),('included', 'Included')], string="payments", required=True)
+    rent_without_charges = fields.Float(string="Rent without charges", related='estate_contract.rental_price', default=0.0, digits=dp.get_precision('Rent without charges'), required=True)
+    rent_charges = fields.Float(string="Charges", default=0.0, digits=dp.get_precision('Charges'))
+    rent_with_charges = fields.Float(string="Rent inclouded charges", default=0.0, digits=dp.get_precision('rent charges included'), readonly=True, compute='_rent_charges')
+    late_fees = fields.Float(string='Late fees (%)', default=0.0, digits=dp.get_precision('Late Fees (%)'))
     other_payment = fields.Float(string='other payments', digits=dp.get_precision('other payments'))
     description_other_payment = fields.Text(string="other payments : Description")
     registering_payment = fields.One2many('lb.payment', 'payment_id', string="payments")
     special_condition = fields.Text(string="Conditions")
-    remaining_balance = fields.Float(string="Remaining Balance", default=0.0, digits=dp.get_precision('Remaining Balance'))
+    remains_to_pay = fields.Float(string="Reste à payer", default=0.0, digits=dp.get_precision('Remains to pay'))
     company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env['res.company']._company_default_get('lb.rental'), index=1)
     currency_id = fields.Many2one('res.currency', 'Currency', compute='_compute_currency_id')
     doc_count = fields.Integer(compute='_compute_attached_docs_count', string="Documents")
-    partner_up_to_date = fields.Selection([('yes', 'yes'),('no', 'No')], string="is the partner up to date ?")
+    keep_up_to_date = fields.Selection([('yes', 'Yes'),('no', 'No')], string="Is The tenant up to date?")
 
     _sql_constraints = [     
     ('reference_rental_unique',
     'UNIQUE(ref_rental)',
-    "Referance Must be Unique"),
+    "The reference must be unique"),
     ]
 
     _sql_constraints = [     
-    ('leasing_estate_unique',
-    'UNIQUE(estate_rented)',
-    "Rental estate leasing Unique"),
+    ('renting_estate_unique',
+    'UNIQUE(estate_contract)',
+    "Ce estate est déjà sous rental"),
     ]
 
 	
@@ -56,17 +56,17 @@ class Rental(models.Model):
     @api.multi
     def _rent_charges(self):
         for r in self:
-            r.rent_with_charges = r.rent_without_charges + r.charges_rent
+            r.rent_with_charges = r.rent_without_charges + r.rent_charges
 
             # Statut rental
-    @api.model
-    def update_statut(self):
-        for r in self:
-            if r.start_rent_date and r.end_rent_date:
-                if r.start_rent_date <= fields.Date.to_string(date.today()) and r.end_rent_date >= fields.Date.to_string(date.today()):
-                    r.rental_status = 'active'
-                else:
-                    r.rental_status = 'inactive'
+    #@api.model
+    #def update_statut(self):
+      #  for r in self:
+            #if r.from_date and r.to_date:
+                #if r.from_date <= fields.Date.to_string(date.today()) and r.to_date >= fields.Date.to_string(date.today()):
+                  #  r.statut_rental = 'active'
+                #else:
+                  #  r.statut_rental = 'inactive'
 
             # Calculation of the currency
     @api.multi
@@ -78,7 +78,7 @@ class Rental(models.Model):
         for template in self:
             template.currency_id = template.company_id.sudo().currency_id.id or main_company.currency_id.id
 			
-            # Contrat attaché
+            # related attaché
 
     def _compute_attached_docs_count(self):
         Attachment = self.env['ir.attachment']
@@ -98,37 +98,37 @@ class Rental(models.Model):
             'view_mode': 'kanban,tree,form',
             'view_type': 'form',
             'help': _('''<p class="oe_view_nocontent_create">
-                        clik to add rental contract</p><p>
+                        Click Create (not import) to add your rental contracts</p><p>
                     </p>'''),
             'limit': 80,
             'context': "{'default_res_model': '%s','default_res_id': %d}" % (self._name, self.id)
         }
 
-    @api.constrains('start_rent_date', 'end_rent_date')
-    def _check_start_end_rent_date(self):
+    @api.constrains('from_date', 'to_date')
+    def _check_from_to_date(self):
         for r in self:
-            if r.start_rent_date > r.end_rent_date:
-                raise exceptions.ValidationError("contract end date must biger thane then contract start date")
+            if r.from_date > r.to_date:
+                raise exceptions.ValidationError("The end of the lease must be greater at the The end of the lease must be greater at the beginning of the lease")
 
 
-class payment(models.Model):
+class Payment(models.Model):
     _name = 'lb.payment'
     _rec_name = 'payment_id'
 
     payment_id = fields.Many2one('lb.rental', ondelete='cascade', string="rental")
-    partner_id = fields.Many2one(related='payment_id.partner', string="partner", store=True)
-    rental_status_id = fields.Selection(related='payment_id.rental_status', string="Statut de la rental")
-    end_rent_date_id = fields.Date(related='payment_id.end_rent_date', string="end of the lease")
-    date_payment = fields.Date(string="Date de payment", required=True)
-    start_period_date = fields.Date(string="period paid : start", required=True)
-    end_period_date = fields.Date(string="period paid : end", required=True)
-    paid_amount = fields.Float(string="Paid_amount", default=0.0, digits=dp.get_precision('Montant Payé'), required=True)
-    commentment_payment = fields.Text(string="Commetment")
-    payment_object = fields.Selection([('advance', 'Advance'),('rent', 'rent of the month'),('penalty', 'penalties'),('other payments', 'others payments')], string="Objet du payment")
+    tenant_id = fields.Many2one(related='payment_id.tenants', string="tenant", store=True)
+    #statut_rental_id = fields.Selection(related='payment_id.statut_rental', string="Statut of the rental")
+    to_date_id = fields.Date(related='payment_id.to_date', string="To Date")
+    payment_date = fields.Date(string="Date of payment", required=True)
+    from_period_date = fields.Date(string="Paid period :From", required=True)
+    to_period_date = fields.Date(string="Paid period : To", required=True)
+    paid_amount = fields.Float(string="Paid Amount", default=0.0, digits=dp.get_precision('Paid Amount'), required=True)
+    commentment_payment = fields.Text(string="Commentment")
+    payment_object = fields.Selection([('advance', 'Advance'),('rent', 'Rent of the month'),('penalty', 'penalties'),('other payments', 'Others payments')], string="payment object")
     company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env['res.company']._company_default_get('lb.rental'), index=1)
     currency_id = fields.Many2one('res.currency', 'Currency', compute='_compute_currency_id')
 
-            # Calculation of the currency
+            # Calcul de la devise
     @api.multi
     def _compute_currency_id(self):
         try:
