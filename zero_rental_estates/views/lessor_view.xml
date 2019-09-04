@@ -11,25 +11,25 @@
                     <sheet>
                     <div class="oe_title">
                         <h1>
-                        <field name="name" default_focus="1" placeholder="Complete Name"/>
+                        <field name="name" default_focus="1" placeholder="Complete name"/>
                         </h1>
                     </div>
 
                     <group>
                         <group>
-                            <field name="civility" options="{&quot;no_open&quot;: True}"/>
-							<label for="Rue" string="address"/>
+                            <field name="greeting" options="{&quot;no_open&quot;: True}"/>
+							<label for="Street" string="Address"/>
                             <div class="o_address_format">
-                                <field name="rue" placeholder="address ..." class="o_address_street"/>
-                                <field name="postale_code" placeholder="Postale Code"/><br></br>
-                                <field name="city" placeholder="city" class="o_address_city"/><br></br>
-                                <field name="country_id" placeholder="country" class="o_address_country"/>
+                                <field name="street" placeholder="Addresse ..." class="o_address_street"/>
+                                <field name="postal_code" placeholder="postal_code"/><br></br>
+                                <field name="city" placeholder="City" class="o_address_city"/><br></br>
+                                <field name="country_id" placeholder="Country" class="o_address_country"/>
                             </div>
                         </group>
                         <group>
                             <field name="email" widget="email"/>
                             <field name="telephone" widget="phone"/>
-                            <field name="postition"/>
+                            <field name="title"/>
                         </group>
                     </group>
                     </sheet>
@@ -43,7 +43,7 @@
             <field name="name">lessor.tree</field>
             <field name="model">lb.lessor</field>
             <field name="arch" type="xml">
-                <tree string="lessor Tree">
+                <tree string="Lessor Tree">
                     <field name="name"/>
                     <field name="email"/>
                     <field name="telephone"/>
@@ -56,8 +56,8 @@
             <field name="name">Search lessor</field>
             <field name="model">lb.lessor</field>
             <field name="arch" type="xml">
-                <search string="Rechercher lessor">
-                    <field name="nom"/>
+                <search string="Search lessor">
+                    <field name="name"/>
                     <field name="email"/>
                     <field name="telephone"/>
                 </search>
@@ -74,7 +74,7 @@
             <field name="search_view_id" ref="view_lessor_filter"/>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
-                    Ceate a new lessor
+                    Create a new lessor
                 </p>
             </field>
         </record>
