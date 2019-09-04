@@ -1,7 +1,7 @@
 # Copyright 2019 Zero for information systems(https://www.erpzero.com).
 
 {
-    'name': 'rental_estate_management',
+    'name': 'zero_rental_estate',
     'version': '11.0.1.0',
     'summary': """rental property management""",
     'description': """This module helps you to Manage rental property""",
