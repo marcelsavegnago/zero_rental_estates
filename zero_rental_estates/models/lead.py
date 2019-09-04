@@ -7,19 +7,20 @@ from odoo.exceptions import UserError, AccessError
 from odoo.tools.safe_eval import safe_eval
 from odoo.addons import decimal_precision as dp
 
-class Potentialpartner(models.Model):
-    _name = 'lb.potential_partner'
+
+class Lead(models.Model):
+    _name = 'lb.lead'
     _rec_name = 'name'
 
     name = fields.Char(string="Name", required=True)
-    company_type = fields.Selection([('particular', 'Particular'),('partner', 'partner')], string="Type") 
-    district_desired = fields.Many2one('lb.district', string="District Desired")
+    company_type = fields.Selection([('individual', 'individual'),('company', 'company')], string="Type") 
+    district_wanted = fields.Many2one('lb.district', string="District Wanted")
     budget = fields.Float(string="Budget", default=0.0, digits=dp.get_precision('Budget'))
     email = fields.Char(string="E-mail")
     telephone = fields.Char(string="Telephone", required=True)
-    civilite = fields.Selection([('m.', 'M.'),('mrs', 'Mrs'),('ms', 'Ms'),('m. and mrs','M. and Mrs')], string="Civility") 
+    civilite = fields.Selection([('m.', 'M.'),('mrs', 'mrs'),('ms', 'Ms'),('m. and mrs','M. and mrs')], string="Civilite") 
     notes = fields.Text(string="Notes")
-    company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env['res.company']._company_default_get('lb.potential_partner'), index=1)
+    company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env['res.company']._company_default_get('lb.lead'), index=1)
     currency_id = fields.Many2one('res.currency', 'Currency', compute='_compute_currency_id')
 
             # Calculation of the currency
