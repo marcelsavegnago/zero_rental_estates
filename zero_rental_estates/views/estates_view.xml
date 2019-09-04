@@ -6,7 +6,7 @@
             <field name="name">estate.form</field>
             <field name="model">lb.estate</field>
             <field name="arch" type="xml">
-                <form string="estate Form">
+                <form string="Estate Form">
                     <sheet>
                     <div class="oe_button_box" name="button_box" groups="base.group_user">
                         <button class="oe_stat_button" name="attachment_tree_view" type="object" icon="fa-files-o">
@@ -16,13 +16,13 @@
                         <group>
                             <group>
 								<field name="lessor_id"/>
-							<label for="street" string="Address"/>
+							<label for="Street" string="Address"/>
                             <div class="o_address_format">
-                                <field name="street" placeholder="Address ..." class="o_address_street"/>
+                                <field name="street" placeholder="Addresse ..." class="o_address_street"/>
                                 <field name="district" placeholder="District"/><br></br>
-                                <field name="postale_code" placeholder="Postale_code"/><br></br>
-                                <field name="city" placeholder="city" class="o_address_city"/><br></br>
-                                <field name="country" placeholder="country" class="o_address_country"/>
+                                <field name="postale_code" placeholder="Postale Code"/><br></br>
+                                <field name="city" placeholder="City" class="o_address_city"/><br></br>
+                                <field name="country" placeholder="Country" class="o_address_country"/>
                             </div>
                             </group>
                             <group>							
@@ -35,7 +35,7 @@
 								<field name="reference"/>
                                     <field name="currency_id" invisible="1"/>
 								<field name="description"/>
-								<field name="rent_price" widget="monetary"/>
+								<field name="rental_price" widget="monetary"/>
                             </group>
                         </group>
                         <notebook>
@@ -56,9 +56,9 @@
             <field name="name">estate.tree</field>
             <field name="model">lb.estate</field>
             <field name="arch" type="xml">
-                <tree string="estate Tree">
+                <tree string="Estate Tree">
                     <field name="type_id"/>
-                    <field name="street" string="Address"/>
+                    <field name="street" string="Addresse"/>
                     <field name="lessor_id"/>
                     <field name="district"/>
                     <field name="city"/>
@@ -70,10 +70,10 @@
         <!-- estates search view -->
 
         <record id="view_estate_filter" model="ir.ui.view">
-            <field name="name">Search estate</field>
+            <field name="name">Search Estate</field>
             <field name="model">lb.estate</field>
             <field name="arch" type="xml">
-                <search string="Search estate">
+                <search string="Search Estate">
                     <field name="lessor_id"/>
                     <field name="type_id"/>
                     <field name="street"/>
@@ -87,14 +87,14 @@
 
 
         <record model="ir.actions.act_window" id="estate_list_action">
-            <field name="name">estates</field>
+            <field name="name">Estates</field>
             <field name="res_model">lb.estate</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="view_estate_filter"/>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
-                    Créer a new estate
+                    Create a new estate
                 </p>
             </field>
         </record>
@@ -127,7 +127,7 @@
 
 
         <record model="ir.actions.act_window" id="type_list_action">
-            <field name="name">Types of estates</field>
+            <field name="name">Types of Estates</field>
             <field name="res_model">lb.type</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
@@ -140,15 +140,15 @@
 
 
 
-        <menuitem id="main_rental_app_menu" name="rental of estates"/>
-        <menuitem id="rental_app_menu" name="rental of estates"
+        <menuitem id="main_rental_app_menu" name="Rental Estates"/>
+        <menuitem id="rental_app_menu" name="Rental Estates"
                   parent="main_rental_app_menu"/>
-        <menuitem id="estate_menu" name="estates"
+        <menuitem id="estate_menu" name="Estates"
                   parent="rental_app_menu" sequence="3"/>
-        <menuitem id="estate_estate_menu" name="estates"
+        <menuitem id="estate_estate_menu" name="Estates"
                   parent="estate_menu" sequence="2"
                   action="estate_list_action"/>
-        <menuitem id="type_menu" name="Types of estates"
+        <menuitem id="type_menu" name="Types of Estates"
                   parent="estate_menu"
                   action="type_list_action" sequence="1"/>
 
