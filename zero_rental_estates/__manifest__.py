@@ -2,7 +2,7 @@
 
 {
     'name': 'zero_rental_estate',
-    'version': '11.0.1.0',
+    'version': '12.0.1.0',
     'summary': """rental property management""",
     'description': """This module helps you to Manage rental property""",
     'category': 'real estate',
