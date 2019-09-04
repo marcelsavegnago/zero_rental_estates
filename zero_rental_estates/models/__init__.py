@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from . import city_district
-from . import lessor
-from . import partner
-from . import potential_partner
-from . import estate_status
 from . import estate
-from . import rental
+from . import tenants
+from . import rentals
+from . import estate_status
+from . import lessor
+from . import lead
+from . import cities_districts
