@@ -1,35 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <!-- rentals form view -->
+        <!-- Rentals form view -->
         <record model="ir.ui.view" id="rental_form_view">
             <field name="name">rental.form</field>
             <field name="model">lb.rental</field>
             <field name="arch" type="xml">
-                <form string="rental Form">
+                <form string="Rental Form">
                     <sheet>
                     <div class="oe_button_box" name="button_box" groups="base.group_user">
                         <button class="oe_stat_button" name="attachment_tree_view" type="object" icon="fa-files-o">
-                            <field string="contracts" name="doc_count" widget="statinfo"/>
+                            <field string="Contrats" name="doc_count" widget="statinfo"/>
                         </button>
 					</div>
 					<group>
                         <group>
-                            <field name="estate_rented"/>
-                            <field name="lessor"/>
+                            <field name="estate_contract"/>
+                            <field name="tenants"/>
                             <field name="utilization"/>
-                            <field name="receipt_date"/>
+                            <field name="receip_date"/>
                         </group>
                         <group>
                             <field name="ref_rental"/>
-                            <field name="start_rented_date"/>
-                            <field name="end_rented_date"/>
+                            <field name="from_date"/>
+                            <field name="to_date"/>
                             <field name="payment"/>
-                            <field name="rental_status"/>
                         </group>
 					</group>
                         <notebook>
-                            <page string="rent">
+                            <page string="Rent">
                                 <group>
                                     <field name="currency_id" invisible="1"/>
                                     <field name="rent_without_charges" widget="monetary"/>
@@ -39,34 +38,33 @@
 							</page>
                             <page string="other payments">
                                 <group>
-									<field name="late_fees" placeholder="for information only"/>
+									<field name="late_fees" placeholder="For Information only"/>
                                 </group>
                                 <group>
-									<label for="other_payment" string="other payments"/>
+									<label for="other_payment" string="Other payments"/>
 										<div>
 											<field name="description_other_payment" placeholder="Description"/>
-											<field name="other_payment" widget="monetary" placeholder="Montant"/>
+											<field name="other_payment" widget="monetary" placeholder="Amount"/>
 										</div>
 								</group>
 							</page>
-                            <page string="Special Condition">
+                            <page string="Special Conditions">
                                 <group>
 									<field name="special_condition"/>
 								</group>
 							</page>
-                            <page string="Registering Payments">
+                            <page string="Registering of payments">
                                 <group>
-									<field name="lessor_up_to_date" attrs="{'invisible': [('statut_rental', '=', 'inactive')]}"/>
+									
                                     <field name="currency_id" invisible="1"/>
-									<field name="remind_to_pay" widget="monetary" attrs="{'invisible':['|',('lessor_up_to_date','=','oui'),('statut_rental','=','inactive')]}"/> 									
 
 								</group>
                                 <field name="registering_payment">
-                                    <tree string="registering  payments" editable="bottom">
+                                    <tree string="Registering of payments" editable="bottom">
                                         <field name="payment_date"/>
-                                        <field name="payment_opject"/>
-                                        <field name="start_rented_date"/>
-                                        <field name="end_rented_date"/>
+                                        <field name="payment_object"/>
+                                        <field name="from_period_date"/>
+                                        <field name="to_period_date"/>
                                         <field name="currency_id" invisible="1"/>
                                         <field name="paid_amount" widget="monetary" sum="Total"/>
                                         <field name="commentment_payment"/>
@@ -79,56 +77,55 @@
             </field>
         </record>
 
-        <!-- rentals tree view -->
+        <!-- Rentals tree view -->
 
         <record model="ir.ui.view" id="rental_tree_view">
             <field name="name">rental.tree</field>
             <field name="model">lb.rental</field>
             <field name="arch" type="xml">
-                <tree string="rental Tree">
-                    <field name="rental_status"/>
-                    <field name="lessor"/>
-                    <field name="estate_rented" string="Estate Address"/>
-                    <field name="rent_with_charges" string="rent"/>
+                <tree string="Rental Tree">
+                    <field name="tenants"/>
+                    <field name="estate_contract" string="Address of estate"/>
+                    <field name="rent_with_charges" string="Rent"/>
                     <field name="utilization"/>
-                    <field name="start_rented_date"/>
-                    <field name="end_rented_date"/>
-                    <field name="lessor_up_to_date" string="Is The Lessor Up To date ?"/>
+                    <field name="from_date"/>
+                    <field name="to_date"/>
+                    <field name="keep_up_to_date" string="Is tenants Up To Date?"/>
                 </tree>
             </field>
         </record>
 
-        <!-- rentals search view -->
+        <!-- Rentals search view -->
         <record id="view_rental_filter" model="ir.ui.view">
             <field name="name">Search rental</field>
             <field name="model">lb.rental</field>
             <field name="arch" type="xml">
-                <search string="Search rental">
-                    <field name="estate_rented"/>
-                    <field name="lessor"/>
+                <search string="Search Rental">
+                    <field name="estate_contract"/>
+                    <field name="tenants"/>
                     <field name="utilization"/>
-                    <field name="start_rented_date"/>
-                    <field name="end_rented_date"/>
+                    <field name="from_date"/>
+                    <field name="to_date"/>
                 </search>
             </field>
         </record>
 
 
         <record model="ir.actions.act_window" id="rental_list_action">
-            <field name="name">rentals</field>
+            <field name="name">Rentals</field>
             <field name="res_model">lb.rental</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="view_rental_filter"/>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
-                    create a new rental
+                   create a new rental contract
                 </p>
             </field>
         </record>
 		
-        <menuitem id="rental_menu" name="rentals"
-                  parent="estate_rental_app_menu"
+        <menuitem id="rental_menu" name="Rentals"
+                  parent="rental_app_menu"
                   action="rental_list_action" sequence="5"/>
 
 
