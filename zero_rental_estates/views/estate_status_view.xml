@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
+        <!-- Estate status form view -->
 
-       <!-- estate_status form view -->
-
-	<record model="ir.ui.view" id="estate_status_form_view">
+		<record model="ir.ui.view" id="estate_status_form_view">
             <field name="name">estate_status.form</field>
             <field name="model">lb.estate_status</field>
             <field name="arch" type="xml">
-                <form string="estate status Form">
+                <form string="Estate status Form">
                     <sheet>
                     <div class="oe_button_box" name="button_box" groups="base.group_user">
                         <button class="oe_stat_button" name="attachment_tree_view" type="object" icon="fa-files-o">
@@ -21,18 +20,18 @@
                             <field name="date_estate_status"/>
                             <field name="ref_estate_status"/>
                             <field name="rental"/>
-                            <field name="estate_status_entry_rental" attrs="{'invisible': [('estate_status_type', '=', 'entry')]}"/>
+                            <field name="estate_status_entry_related" attrs="{'invisible': [('estate_status_type', '=', 'entry')]}"/>
                         </group>
                         <group>
-                            <field name="notes" placeholder="note interne..."/>
+                            <field name="notes" placeholder="internal note..."/>
                         </group>
                     </group>
                         <notebook>
-                            <page string="estate status">
+                            <page string="Estate status">
                                 <field name="registering_estate_status">
-                                    <tree string="estate status">
-                                        <field name="estate_name"/>
-                                        <field name="Status"/>
+                                    <tree string="Estate status">
+                                        <field name="name_piece"/>
+                                        <field name="Estate"/>
                                     </tree>
                                 </field>
 							</page>
@@ -42,13 +41,13 @@
             </field>
         </record>
 
-        <!-- estate status tree view -->
+        <!-- Estate status tree view -->
 
         <record model="ir.ui.view" id="estate_status_tree_view">
-            <field name="name">estate_status.tree</field>
+            <field name="name">estatestatus.tree</field>
             <field name="model">lb.estate_status</field>
             <field name="arch" type="xml">
-                <tree string="estate status Tree">
+                <tree string="Estate status Tree">
                     <field name="estate_status_type"/>
                     <field name="date_estate_status"/>
                     <field name="rental"/>
@@ -56,12 +55,12 @@
             </field>
         </record>
 
-        <!-- estate status search view -->
+        <!-- Estate status search view -->
         <record id="view_estate_status_filter" model="ir.ui.view">
-            <field name="name">Search estate status</field>
+            <field name="name">Search Estate status</field>
             <field name="model">lb.estate_status</field>
             <field name="arch" type="xml">
-                <search string="Search estate status">
+                <search string="Search Estate status">
                     <field name="estate_status_type"/>
                     <field name="date_estate_status"/>
                     <field name="rental"/>
@@ -72,7 +71,7 @@
 
 
         <record model="ir.actions.act_window" id="estate_status_list_action">
-            <field name="name">estate status</field>
+            <field name="name">Estate status</field>
             <field name="res_model">lb.estate_status</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
@@ -84,18 +83,18 @@
             </field>
         </record>
 
-        <!-- registering estate status form view -->
+        <!-- registering Estate status form view -->
 
         <record model="ir.ui.view" id="registering_estate_status_form_view">
             <field name="name">registering_estate_status.form</field>
             <field name="model">lb.registering_estate_status</field>
             <field name="arch" type="xml">
-                <form string="registering estate status Form">
+                <form string="Registering Estate status Form">
                     <sheet>
 					<group>
                         <group>
-                            <field name="registering_estate"/>
-                            <field name="Status"/>
+                            <field name="name_piece"/>
+                            <field name="Estate"/>
                             <field name="comment"/>
                         </group>
 					</group>
@@ -108,15 +107,15 @@
 		
 
         <record model="ir.actions.act_window" id="garant_list_action">
-            <field name="name">registering estate status</field>
+            <field name="name">Registering Estate status</field>
             <field name="res_model">lb.registering_estate_status</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
 
 
-        <menuitem id="estate_status_menu" name="estate status"
-                  parent="estate_rental_app_menu"
+        <menuitem id="estate_status_menu" name="Estate status"
+                  parent="rental_app_menu"
                   action="estate_status_list_action" sequence="6"/>
 
 
