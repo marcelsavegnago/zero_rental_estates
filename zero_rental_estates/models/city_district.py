@@ -19,5 +19,5 @@ class District(models.Model):
     _rec_name = 'name_district'
 
     name_district = fields.Char(string="District")
-    city_partner = fields.Many2one('lb.city')
+    city_related = fields.Many2one('lb.city')
 
