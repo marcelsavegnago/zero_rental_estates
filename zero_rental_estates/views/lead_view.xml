@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Leads form view -->
+
+		<record model="ir.ui.view" id="leads_form_view">
+            <field name="name">lead.form</field>
+            <field name="model">lb.lead</field>
+            <field name="arch" type="xml">
+                <form string="Lead Form">
+                    <sheet>
+                    <div class="oe_title">
+                        <field name="company_type" widget="radio" class="oe_edit_only" options="{'horizontal': true}"/>
+                        <h1>
+                        <field name="name" default_focus="1" placeholder="Complete name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="civilite" options="{&quot;no_open&quot;: True}" attrs="{'invisible': [('company_type', '=', 'company')]}"/>
+							<field name="district_wanted"/>
+                            <field name="currency_id" invisible="1"/>
+							<field name="budget" widget="monetary"/>
+                        </group>
+                        <group>
+                            <field name="email" widget="email"/>
+                            <field name="telephone" widget="phone"/>
+                            <field name="notes" placeholder="internal note..."/>
+                        </group>
+                    </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Leads tree view -->
+
+        <record model="ir.ui.view" id="leads_tree_view">
+            <field name="name">lead.tree</field>
+            <field name="model">lb.lead</field>
+            <field name="arch" type="xml">
+                <tree string="Lead Tree">
+                    <field name="company_type"/>
+                    <field name="name"/>
+                    <field name="district_wanted"/>
+                    <field name="budget"/>
+                    <field name="telephone"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Leads search view -->
+        <record id="view_lead_filter" model="ir.ui.view">
+            <field name="name">Search Lead</field>
+            <field name="model">lb.lead</field>
+            <field name="arch" type="xml">
+                <search string="Search Lead">
+                    <field name="company_type"/>
+                    <field name="name"/>
+                    <field name="district_wanted"/>
+                    <field name="telephone"/>
+                </search>
+            </field>
+        </record>
+
+
+
+        <record model="ir.actions.act_window" id="lead_list_action">
+            <field name="name">Leads</field>
+            <field name="res_model">lb.lead</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_lead_filter"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create a new Lead
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="lead_menu" name="Leads"
+                  parent="tenant_menu"
+                  action="lead_list_action"/>
+
+    </data>
+</odoo>
