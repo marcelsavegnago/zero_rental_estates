@@ -2,7 +2,7 @@
 
 from . import estate
 from . import tenants
-from . import rentals
+from . import rental
 from . import estate_status
 from . import lessor
 from . import lead
